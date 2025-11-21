@@ -1,0 +1,16 @@
+---
+- name: Create users and manage group membership
+  hosts: webserver
+  become: true
+  vars_files:
+    - vars/users.yml
+
+  tasks:
+    - name: Ensure users exist with correct groups
+      ansible.builtin.user:
+        name: "{{ item.name }}"
+        groups: "{{ item.groups | join(',') }}"
+        append: true
+        state: present
+      loop: "{{ users }}"
+

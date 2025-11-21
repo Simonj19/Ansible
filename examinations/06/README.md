@@ -167,6 +167,8 @@ There are several ways to accomplish this, and there is no _best_ way to do this
 
 Is this a good way to handle these types of conditionals? What do you think?
 
+Svar: Vi använder oss av register för att se om det har blivit någon ändring när playbooken körst för att kunna veta om vi behöver starta om en tjänst eller inte, med hjälp av detta kan vi förhindra att tjänster startas om när det inte behövs.
+
 # BONUS QUESTION
 
 Imagine you had a playbook with hundreds of tasks to be done on several hosts, and each one of these tasks

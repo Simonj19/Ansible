@@ -121,9 +121,13 @@ Run the exact same playbook again and study the output. What is the difference?
 
 What does the `ansible.builtin.debug` module actually do?
 
+Svar: Modulen används för debugging, visar felmeddelanden eller värden på variabler under körning, den gör inga ändringar på värdarna utan används främst för felsökning eller testning.
+
 ## QUESTION B
 
 What is the variable 'ansible_facts' and where does it come from?
+
+Svar: Samlar in information om varje värd vi hanterar och samlas in automatiskt när vår playbook körs.
 
 ## QUESTION C
 
@@ -133,6 +137,8 @@ next time we run the playbook. This is a concept called _idempotency_.
 How do we now remove the software we installed through the playbook above? Make the
 playbook remove the exact same software we previously installed. Call the created
 playbook `03-uninstall-software.yml`.
+
+Svar: För att ta bort den tidigare installerade programvaran skapar vi en ny playbook "uninstall-software.yml" som sätter paketens tillstånd till absent istället. 
 
 ## BONUS QUESTION
 

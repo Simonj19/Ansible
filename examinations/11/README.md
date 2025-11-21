@@ -38,6 +38,8 @@ When your playbook is run, one should be able to do this on the webserver:
 
 There are multiple ways to accomplish this, but keep in mind _idempotency_ and _maintainability_.
 
+Svar: Skapat addusers.yml som hämtar information från /vars/users.yml för att lägga till grupper/användare.
+
 # QUESTION B
 
 Write a playbook that uses
@@ -49,6 +51,8 @@ to copy all `\*.md` files in the `files/` directory to the `deploy` user's direc
 For now you can create empty files in the `files/` directory called anything as long as the suffix is `.md`:
 
     $ touch files/foo.md files/bar.md files/baz.md
+
+Svar: Skapat 11-copy-md-files.yml för att kopiera över några test .md filer jag placerat i /Files/
 
 # BONUS QUESTION
 

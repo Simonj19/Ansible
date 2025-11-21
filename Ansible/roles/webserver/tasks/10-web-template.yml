@@ -1,0 +1,33 @@
+---
+- name: Copy HTTPS configuration
+  ansible.builtin.copy:
+        src: Files/https.conf
+        dest: /etc/nginx/conf.d/https.conf
+        owner: root
+        group: root
+        mode: '0644'
+
+- name: Deploy nginx configuration from template
+  ansible.builtin.template:
+        src: templates/example.internal.conf.j2
+        dest: /etc/nginx/conf.d/example.internal.conf
+        owner: root
+        group: root
+        mode: '0644'
+        notify: Reload nginx
+
+- name: Create web root directory structure
+  ansible.builtin.file:
+        path: /var/www/example.internal/html
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+
+- name: Upload index.html to web root
+  ansible.builtin.copy:
+        src: files/index.html
+        dest: /var/www/example.internal/html/index.html
+        owner: root
+        group: root
+        mode: '0644'

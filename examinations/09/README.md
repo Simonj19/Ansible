@@ -18,8 +18,12 @@ Make a copy of the playbook from the previous examination, call it `09-mariadb-p
 and modify it so that the task that sets the password is injected via an Ansible variable,
 instead of as a plain text string in the playbook.
 
+
 # QUESTION B
 
 When the [QUESTION A](#question-a) is solved, use `ansible-vault` to store the password in encrypted
 form, and make it possible to run the playbook as before, but with the password as an
 Ansible Vault secret instead.
+
+
+VAULT-LÖSENORD:Simon123

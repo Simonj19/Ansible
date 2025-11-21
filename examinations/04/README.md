@@ -53,12 +53,23 @@ module.
 
 How can we make the web server start with an addition of just one line to the playbook above?
 
+Svar: Vi lägger till raden: 
+```yml
+state: started
+```
+under 
+```yml
+enabled: true
+```
+
 # QUESTION B
 
 You make have noted that the `become: true` statement has moved from a specific task to the beginning
 of the playbook, and is on the same indentation level as `tasks:`.
 
 What does this accomplish?
+
+Svar: När vi flyttar upp det till början av vår playbook gör det att alla våra uppgifter/tasks körs med root/sudo behörighet.
 
 # QUESTION C
 
@@ -71,6 +82,8 @@ Run the new playbook, then make sure that the web server is not running (you can
 log in to the machine and make sure that there are no `nginx` processes running.
 
 Why did we change the order of the tasks in the `04-uninstall-webserver.yml` playbook?
+
+Svar: Vi stoppar och inaktiverar Nginx innan vi avinstallerar paketet, om vi tar bort programvaran först kan tjänsten inte stoppas. Detta gör vi för att undvika fel när vi kör vår playbook. 
 
 # BONUS QUESTION
 

@@ -1,0 +1,13 @@
+---
+users:
+  - name: alovelace
+    groups: ['wheel', 'audio', 'video']
+
+  - name: aturing
+    groups: ['tape']
+
+  - name: edijkstra
+    groups: ['tcpdump']
+
+  - name: ghopper
+    groups: ['wheel', 'audio']

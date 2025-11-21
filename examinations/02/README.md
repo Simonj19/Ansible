@@ -112,9 +112,12 @@ incompatibilities.
 
 What happens if you run `ansible-inventory --list` in the directory you created above?
 
+Svar: Skriver ut ansible inventariet i JSON-format, Visar alla grupper DB/Web/Ungrouped samt vilka värdar som finns i varje grupp. Visar också värdvariabler som ansible_user och ssh key.
 ## QUESTION B
 
 What happens if you run `ansible-inventory --graph` in the directory you created above?
+
+Svar: Kommandot visar en text baserad graf av inventariet, visar alla grupper samt vilka hosts som finns i varje. 
 
 ## QUESTION C
 
@@ -131,6 +134,8 @@ Now run:
 Study the output of this command.
 
 What does the `ansible_connection=local` part mean?
+
+Svar: Säger åt ansible att köra kommandon lokalt på den fysiska maskinen och inte via SSH
 
 ## BONUS QUESTION
 

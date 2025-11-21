@@ -81,6 +81,8 @@ What does the output look like the first time you run this playbook?
 
 What does the output look like the second time you run this playbook?
 
+Svar: Först gången vi kör så indikerar Ansible att filerna har kopierats över(True), andra gången får vi (False) då filerna redan finns och ingen ändring gjorts.
+
 # QUESTION B
 
 Even if we have copied the configuration to the right place, we still do not have a working https service
@@ -123,6 +125,8 @@ a self signed certificate.
 
 What is the disadvantage of having a task that _always_ makes sure a service is restarted, even if there is
 no configuration change?
+
+Svar: Nackdelen är att tjänsten kommer startas om varje gång playbooken körs, även när inga förändringar gjorts vilket kan orsaka onödiga driftstopp eller liknande.
 
 # BONUS QUESTION
 

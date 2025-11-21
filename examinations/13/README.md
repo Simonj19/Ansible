@@ -21,3 +21,10 @@ Also note the difference between `restarted` and `reloaded` in the [ansible.buil
 
 In order for `nginx` to pick up any configuration changes, it's enough to do a `reload` instead of
 a full `restart`.
+
+
+Svar: För att lösa detta har jag lagt till 
+```yml
+ notify: Reload nginx
+``` 
+I min 10-web-template.yml fil, där vi deployar nginx från template vilket gör att nginx bara reloadas om det har skett några ändringar (görs via en handler jag lagt i handlers mappen)

@@ -1,0 +1,12 @@
+---
+# tasks file for roles/webserver
+- name: Import task 03-install-software.yml
+  ansible.builtin.import_tasks: 03-install-software.yml
+- name: Import task install-cert.yml
+  ansible.builtin.import_tasks: install-cert.yml
+- name: Import task webserver.yml
+  ansible.builtin.import_tasks: webserver.yml
+- name: Import task 10-web-template.yml
+  ansible.builtin.import_tasks: 10-web-template.yml
+- name: Import task 11-addusers.yml
+  ansible.builtin.import_tasks: 11-addusers.yml

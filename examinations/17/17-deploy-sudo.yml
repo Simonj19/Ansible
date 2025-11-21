@@ -1,0 +1,33 @@
+# yamllint disable rule:line-length
+---
+- name: Ensure deploy user has sudo with password
+  hosts: all
+  gather_facts: false   # Viktigt! Kör inte setup med sudo globalt
+  vars:
+    deploy_password_hash: '$6$xpQ8SZlqQhHEeK71$31hGuwIUTPDuH7tM/hVYfkCuRBFNbGqtmCa.MNzWWYvls4kfZZe.uBdFu5bszhDYh/KdMUkNO4C8TSzrYPuXK0'
+
+  tasks:
+    - name: Gather facts without sudo
+      ansible.builtin.setup:
+        gather_subset: all
+
+    - name: Set a password for deploy user
+      ansible.builtin.user:
+        name: deploy
+        password: "{{ deploy_password_hash }}"
+        update_password: always
+      become: true
+      become_user: root
+
+    - name: Ensure deploy has sudo but with password
+      ansible.builtin.lineinfile:
+        path: /etc/sudoers.d/deploy
+        regexp: '^%?deploy'
+        line: 'deploy ALL=(ALL) ALL'
+        owner: root
+        group: root
+        mode: '0440'
+        create: true
+        validate: 'visudo -cf %s'
+      become: true
+      become_user: root

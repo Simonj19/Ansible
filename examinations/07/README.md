@@ -23,11 +23,19 @@ Make similar changes to this playbook that we did for the _nginx_ server, so tha
 the `mariadb` service starts automatically at boot, and is started when the playbook
 is run.
 
+Svar: Se 07-mariadb.yml
+
 # QUESTION B
 
 When you have run the playbook above successfully, how can you verify that the `mariadb`
 service is started and is running?
 
+Svar: Genom att logga på min DB server och slå följande kommando:
+```bash
+sudo systemctl status mariadb
+```
+
+Och dubbelkolla så status är "active"
 # BONUS QUESTION
 
 How many different ways can use come up with to verify that the `mariadb` service is running?
