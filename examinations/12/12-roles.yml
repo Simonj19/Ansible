@@ -1,11 +1,13 @@
----
+# Denna playbook styr uppdelningen mellan webb och databasserver.
+# Använder roller för att förenkla min playbook och få mer struktur.
+
 - name: Configure the web server(s) according to specs
-  become: true
+  become: true  #Root rättigheter
   hosts: webserver
   vars_files:
     - vars/users.yml
   roles:
-    - webserver
+    - webserver 
 
 - name: Configure the database server(s) according to specs
   become: true
@@ -13,4 +15,4 @@
   vars_files:
     - secrets.yml
   roles:
-    - dbserver
+    - dbserver 

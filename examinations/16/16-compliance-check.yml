@@ -1,15 +1,15 @@
----
+ # Playbook som kör olika compliance checks för att säkerställa att allt är i sin ordning
 - name: Security Compliance Checks for AlmaLinux
   hosts: all
   gather_facts: true
-  become: true
+  become: true # Root rättigheter
 
   tasks:
-    # 1 Gather installed packages
+    # 1. Kontroll: Av installerade paket
     - name: Gather installed packages
       ansible.builtin.package_facts:
 
-    # 2 Check telnet-server is not installed
+    # 2. Kontroll: Att telnet inte är installerat
     - name: Check telnet-server is not installed
       ansible.builtin.assert:
         fail_msg: "telnet-server package is installed"
@@ -19,7 +19,7 @@
       register: telnet_check
       failed_when: telnet_check.failed
 
-    # 3 Check rsh-server is not installed
+    # 3. Kontroll: Att rsh-server inte är installerat
     - name: Check rsh-server is not installed
       ansible.builtin.assert:
         fail_msg: "rsh-server package is installed"
@@ -29,7 +29,7 @@
       register: rsh_check
       failed_when: rsh_check.failed
 
-    # 4 Check ypserv is not installed
+    # 4. Kontroll: Att ypserver inte är installerat
     - name: Check ypserv is not installed
       ansible.builtin.assert:
         fail_msg: "ypserv package is installed"
@@ -39,16 +39,16 @@
       register: ypserv_check
       failed_when: ypserv_check.failed
 
-    # 5 Check if hostname is set
+    # 5. Kontroll: Att hostname är satt
     - name: Check that the system hostname is set
       ansible.builtin.assert:
-       that:
-        - ansible_hostname is defined
-        - ansible_hostname != ''
-       success_msg: "Hostname is set"
-       fail_msg: "Hostname is not set or is empty"
+        that:
+          - ansible_hostname is defined
+          - ansible_hostname != ''
+        success_msg: "Hostname is set"
+        fail_msg: "Hostname is not set or is empty"
 
-    # 6 /tmp permissions
+    # 6. Kontroll: Att /tmp permission är 1777
     - name: Check /tmp directory permissions
       ansible.builtin.stat:
         path: /tmp
@@ -57,13 +57,13 @@
     - name: Assert /tmp permissions are 1777
       ansible.builtin.assert:
         that:
-          - tmp_dir.stat.mode[-4:] == '1777'  
+          - tmp_dir.stat.mode[-4:] == '1777'
         success_msg: "/tmp has correct permissions"
         fail_msg: "/tmp has incorrect permissions"
       register: tmp_check
       failed_when: tmp_check.failed
 
-    # 7 Firewalld running
+    # 7. Kontroll: Att vår brandvägg är igång (Eftersom jag inte installerat någon i min miljö så går inte detta test igenom.)
     - name: Gather service facts
       ansible.builtin.service_facts:
 
@@ -77,7 +77,7 @@
       register: firewalld_check
       failed_when: firewalld_check.failed
 
-    # 8 Rsyslog running
+    # 8. Kontroll: rsyslog ska vara aktiv för systemloggning
     - name: Assert rsyslog is running
       ansible.builtin.assert:
         that:
@@ -88,7 +88,7 @@
       register: rsyslog_check
       failed_when: rsyslog_check.failed
 
-    # 9 Sudo logging
+    # 9. Kontroll: Sudo-loggning ska finnas
     - name: Check sudo log file exists
       ansible.builtin.stat:
         path: /var/log/sudo.log
@@ -103,7 +103,7 @@
       register: sudo_check
       failed_when: sudo_check.failed
 
-    # 10 Systemd-journald service
+    # 10. Kontroll: Att systemd-journald måste vara igång för logghantering
     - name: Assert systemd-journald is running
       ansible.builtin.assert:
         that:
@@ -113,4 +113,3 @@
         fail_msg: "Systemd-journald service is not running"
       register: journald_check
       failed_when: journald_check.failed
-

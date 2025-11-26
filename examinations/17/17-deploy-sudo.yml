@@ -1,9 +1,10 @@
-# yamllint disable rule:line-length
+# Denna playbook skapar och "säkrar" en deploy-user
+# Jag använder inte global become eftersom jag vill minimera root användning
 ---
 - name: Ensure deploy user has sudo with password
   hosts: all
-  gather_facts: false   # Viktigt! Kör inte setup med sudo globalt
-  vars:
+  gather_facts: false 
+  vars: # Hashad version av lösenordet för högre säkerhet
     deploy_password_hash: '$6$xpQ8SZlqQhHEeK71$31hGuwIUTPDuH7tM/hVYfkCuRBFNbGqtmCa.MNzWWYvls4kfZZe.uBdFu5bszhDYh/KdMUkNO4C8TSzrYPuXK0'
 
   tasks:
